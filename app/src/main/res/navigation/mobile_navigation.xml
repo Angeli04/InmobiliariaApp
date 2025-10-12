@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/inicioFragment">
+
+    <fragment
+        android:id="@+id/inicioFragment"
+        android:name="com.isma.inmobiliaria.ui.inicio.InicioFragment"
+        android:label="fragment_inicio"
+        tools:layout="@layout/fragment_inicio" />
+
+    <fragment
+        android:id="@+id/perfilFragment"
+        android:name="com.isma.inmobiliaria.ui.perfil.PerfilFragment"
+        android:label="fragment_perfil"
+        tools:layout="@layout/fragment_perfil" />
+    <fragment
+        android:id="@+id/inmueblesFragment"
+        android:name="com.isma.inmobiliaria.ui.inmuebles.InmueblesFragment"
+        android:label="fragment_inmuebles"
+        tools:layout="@layout/fragment_inmuebles" />
+    <fragment
+        android:id="@+id/inquilinosFragment"
+        android:name="com.isma.inmobiliaria.ui.inquilinos.InquilinosFragment"
+        android:label="fragment_inquilinos"
+        tools:layout="@layout/fragment_inquilinos" />
+    <fragment
+        android:id="@+id/contratosFragment"
+        android:name="com.isma.inmobiliaria.ui.contratos.ContratosFragment"
+        android:label="fragment_contratos"
+        tools:layout="@layout/fragment_contratos" />
+    <fragment
+        android:id="@+id/logOutFragment"
+        android:name="com.isma.inmobiliaria.ui.logout.LogOutFragment"
+        android:label="fragment_log_out"
+        tools:layout="@layout/fragment_log_out" />
+
+</navigation>
