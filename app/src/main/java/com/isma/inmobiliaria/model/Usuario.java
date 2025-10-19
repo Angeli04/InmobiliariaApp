@@ -1,26 +1,39 @@
 package com.isma.inmobiliaria.model;
-public class Usuario {
+
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
 
     private int idUsuario;
     private String nombre;
     private String apellido;
     private String email;
     private String clave;
+    private String dni;
+    private String telefono;
     private String avatar;
     private int rol;
-    private int existe; // Campo adicional según tu backend
+    private int existe;
 
-    // Constructor vacío (obligatorio para Gson)
+    // Constructor vacío (obligatorio para Gson/Firebase)
     public Usuario() {
     }
 
-    // Constructor opcional
-    public Usuario(String email, String clave) {
+    // Constructor completo (con los parámetros ordenados y corregidos)
+    public Usuario(int idUsuario, String nombre, String apellido, String email, String clave, String dni, String telefono, String avatar, int rol, int existe) {
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.apellido = apellido;
         this.email = email;
         this.clave = clave;
+        this.dni = dni;
+        this.telefono = telefono;
+        this.avatar = avatar;
+        this.rol = rol;
+        this.existe = existe;
     }
 
-    // Getters y Setters
+    // Getters y Setters (incluyendo los que faltaban)
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -59,6 +72,22 @@ public class Usuario {
 
     public void setClave(String clave) {
         this.clave = clave;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     public String getAvatar() {

@@ -31,7 +31,6 @@ public class LoginActivity extends AppCompatActivity {
                 String contraseña = binding.etContrasenia.getText().toString();
                 vm.iniciarSesion(usuario, contraseña);
                 vm.getMensaje().observe(LoginActivity.this, mensaje -> {
-                    // Iniciamos el fragment inicio a traves de un intent
 
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
@@ -39,9 +38,9 @@ public class LoginActivity extends AppCompatActivity {
 
                 });
                 vm.getError().observe(LoginActivity.this, error -> {
-                    // Mostramos el error en un toast
+
                     Toast.makeText(LoginActivity.this, error, Toast.LENGTH_SHORT).show();
-                    // mostramos el error por consola con un log
+
                     Log.e("ErrorLogin", error);
                 });
 
