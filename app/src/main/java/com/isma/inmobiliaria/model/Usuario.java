@@ -9,7 +9,7 @@ public class Usuario implements Serializable {
     private String apellido;
     private String email;
     private String clave;
-    private String dni;
+    private int dni;
     private String telefono;
     private String avatar;
     private int rol;
@@ -20,7 +20,7 @@ public class Usuario implements Serializable {
     }
 
     // Constructor completo (con los parámetros ordenados y corregidos)
-    public Usuario(int idUsuario, String nombre, String apellido, String email, String clave, String dni, String telefono, String avatar, int rol, int existe) {
+    public Usuario(int idUsuario, String nombre, String apellido, String email, String clave, int dni, String telefono, String avatar, int rol, int existe) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -74,11 +74,11 @@ public class Usuario implements Serializable {
         this.clave = clave;
     }
 
-    public String getDni() {
+    public int getDni() {
         return dni;
     }
 
-    public void setDni(String dni) {
+    public void setDni(int dni) {
         this.dni = dni;
     }
 

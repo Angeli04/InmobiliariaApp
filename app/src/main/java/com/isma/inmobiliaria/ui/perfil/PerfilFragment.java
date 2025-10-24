@@ -44,7 +44,7 @@ public class PerfilFragment extends Fragment {
                     binding.etId.setText(usuario.getIdUsuario() + "");
                     binding.etNombre.setText(usuario.getNombre());
                     binding.etApellido.setText(usuario.getApellido());
-                    binding.etDni.setText(usuario.getDni());
+                    binding.etDni.setText(usuario.getDni() + "");
                     binding.etTelefono.setText(usuario.getTelefono());
                     binding.etEmail.setText(usuario.getEmail());
             }
@@ -73,7 +73,7 @@ public class PerfilFragment extends Fragment {
                 usuarioActualizado.setIdUsuario(Integer.parseInt(binding.etId.getText().toString()));
                 usuarioActualizado.setNombre(binding.etNombre.getText().toString());
                 usuarioActualizado.setApellido(binding.etApellido.getText().toString());
-                usuarioActualizado.setDni(binding.etDni.getText().toString());
+                usuarioActualizado.setDni(Integer.parseInt(binding.etDni.getText().toString()));
                 usuarioActualizado.setTelefono(binding.etTelefono.getText().toString());
                 usuarioActualizado.setEmail(binding.etEmail.getText().toString());
 

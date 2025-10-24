@@ -123,7 +123,7 @@ public class PerfilViewModel extends AndroidViewModel {
 
             //validacion de campos
             if (usuarioActualizado.getNombre().isEmpty() || usuarioActualizado.getApellido().isEmpty() ||
-                    usuarioActualizado.getDni().isEmpty() || usuarioActualizado.getTelefono().isEmpty() ||
+                    usuarioActualizado.getDni() == 0 || usuarioActualizado.getTelefono().isEmpty() ||
                     usuarioActualizado.getEmail().isEmpty()) {
                 mMensaje.postValue("Por favor, complete todos los campos");
                 return;
