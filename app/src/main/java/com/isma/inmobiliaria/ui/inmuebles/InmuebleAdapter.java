@@ -1,8 +1,8 @@
-/*
-
 package com.isma.inmobiliaria.ui.inmuebles;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -42,16 +44,23 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
     public void onBindViewHolder(@NonNull InmuebleViewHolder holder, int position) {
         String urls = "http://192.168.0.7:5164";
         Inmueble i = inmuebleList.get(position);
-        holder.tvDireccion.setText//(i.getDireccion());
-        holder.tvPrecio.setText(i.getPrecio());
+        holder.tvDireccion.setText(i.getDireccion());
+        holder.tvPrecio.setText(i.getPrecio() + "");
         Glide.with(context)
-                .load(urls + i.getImagen())
-                .placeholder(null)
+                .load(urls + i.getImagenUrl())
+                .placeholder(R.drawable.ic_no_image)
                 .error("null")
                 .into(holder.imagen);
-
-
-    }
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("inmueble", i);
+                Navigation.findNavController((Activity) view.getContext(), R.id.nav_host_fragment_content_main)
+                        .navigate(R.id.detalleInmueble, bundle);
+            }
+            });
+    };
 
     @Override
     public int getItemCount() {
@@ -63,17 +72,15 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         private TextView tvDireccion, tvPrecio;
         private ImageView imagen;
 
-
-
+        private CardView cardView;
 
         public InmuebleViewHolder(@NonNull View itemView) {
             super(itemView);
             tvDireccion = itemView.findViewById(R.id.tvDireccion);
             tvPrecio = itemView.findViewById(R.id.tvPrecio);
             imagen = itemView.findViewById(R.id.imageView3);
-
+            cardView = itemView.findViewById(R.id.idCard);
         }
     }
 
 }
-*/

@@ -1,4 +1,4 @@
-/*package com.isma.inmobiliaria.ui.inmuebles;
+package com.isma.inmobiliaria.ui.inmuebles;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
-
+import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +25,7 @@ public class InmueblesFragment extends Fragment {
     private InmueblesViewModel vm;
     private FragmentInmueblesBinding binding;
 
+
     public static InmueblesFragment newInstance() {
         return new InmueblesFragment();
     }
@@ -34,23 +35,18 @@ public class InmueblesFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         vm = new ViewModelProvider(this).get(InmueblesViewModel.class);
         binding = FragmentInmueblesBinding.inflate(inflater, container, false);
-
         vm.getInmuebles().observe(getViewLifecycleOwner(), new Observer<List<Inmueble>>() {
             @Override
             public void onChanged(List<Inmueble> inmuebles) {
+                InmuebleAdapter ia = new InmuebleAdapter(inmuebles, getContext());
+                binding.rvInmuebles.setLayoutManager(new LinearLayoutManager(getContext()));
+                binding.rvInmuebles.setAdapter(ia);
 
             }
 
-
         });
-        return null;
+        vm.leerInmuebles();
+        return binding.getRoot();
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        vm = new ViewModelProvider(this).get(InmueblesViewModel.class);
-        // TODO: Use the ViewModel
-    }
-
-}*/
+}

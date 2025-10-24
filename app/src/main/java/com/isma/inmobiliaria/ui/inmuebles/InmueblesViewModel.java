@@ -1,4 +1,3 @@
-/*
 
 package com.isma.inmobiliaria.ui.inmuebles;
 
@@ -39,9 +38,10 @@ public class InmueblesViewModel extends AndroidViewModel {
 
     public void leerInmuebles() {
 
-        String token  = ApiClient.guardarToken(getApplication(), token);
+        String token  = ApiClient.leerToken(getApplication());
         ApiClient.ApiService api = ApiClient.getApiService();
-        Call<List<Inmueble>> llamada = api.(token);
+        Call<List<Inmueble>> llamada = api.listarInmuebles("Bearer " + token);
+
 
         llamada.enqueue(new Callback<List<Inmueble>>() {
             @Override
@@ -61,5 +61,3 @@ public class InmueblesViewModel extends AndroidViewModel {
     }
 
 }
-
- */

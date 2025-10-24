@@ -5,8 +5,11 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.isma.inmobiliaria.model.Inmueble;
 import com.isma.inmobiliaria.model.TokenResponse;
 import com.isma.inmobiliaria.model.Usuario;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -50,6 +53,12 @@ public class ApiClient {
 
         @POST("api/Auth/actualizar")
         Call<Usuario> actualizarUsuario(@Header("Authorization") String token, @Body Usuario usuarioActualizado);
+
+        @GET("api/Auth/listarInmuebles")
+        Call<List<Inmueble>> listarInmuebles(@Header("Authorization") String token);
+
+        @GET("api/Auth/listarInmueblesCompletos")
+        Call<List<Inmueble>> listarInmueblesCompletos(@Header("Authorization") String token);
 
 
     }

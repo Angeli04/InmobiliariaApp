@@ -20,7 +20,11 @@
         android:id="@+id/inmueblesFragment"
         android:name="com.isma.inmobiliaria.ui.inmuebles.InmueblesFragment"
         android:label="fragment_inmuebles"
-        tools:layout="@layout/fragment_inmuebles" />
+        tools:layout="@layout/fragment_inmuebles" >
+        <action
+            android:id="@+id/action_inmueblesFragment_to_detalleInmueble"
+            app:destination="@id/detalleInmueble" />
+    </fragment>
     <fragment
         android:id="@+id/inquilinosFragment"
         android:name="com.isma.inmobiliaria.ui.inquilinos.InquilinosFragment"
@@ -36,5 +40,10 @@
         android:name="com.isma.inmobiliaria.ui.logout.LogOutFragment"
         android:label="fragment_log_out"
         tools:layout="@layout/fragment_log_out" />
+    <fragment
+        android:id="@+id/detalleInmueble"
+        android:name="com.isma.inmobiliaria.ui.inmuebles.DetalleInmueble"
+        android:label="fragment_detalle_inmueble"
+        tools:layout="@layout/fragment_detalle_inmueble" />
 
 </navigation>
