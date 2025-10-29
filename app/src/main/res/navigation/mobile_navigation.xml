@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_inmueblesFragment_to_detalleInmueble"
             app:destination="@id/detalleInmueble" />
+        <action
+            android:id="@+id/action_inmueblesFragment_to_crearInmueble"
+            app:destination="@id/crearInmueble" />
     </fragment>
     <fragment
         android:id="@+id/inquilinosFragment"
@@ -45,5 +48,10 @@
         android:name="com.isma.inmobiliaria.ui.inmuebles.DetalleInmueble"
         android:label="fragment_detalle_inmueble"
         tools:layout="@layout/fragment_detalle_inmueble" />
+    <fragment
+        android:id="@+id/crearInmueble"
+        android:name="com.isma.inmobiliaria.ui.inmuebles.CrearInmueble"
+        android:label="fragment_crear_inmueble"
+        tools:layout="@layout/fragment_crear_inmueble" />
 
 </navigation>

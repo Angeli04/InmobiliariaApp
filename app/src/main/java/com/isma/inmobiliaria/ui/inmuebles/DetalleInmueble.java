@@ -42,6 +42,14 @@ public class DetalleInmueble extends Fragment {
             binding.imagenDetalle.setImageResource(R.drawable.ic_no_image);
         });
 
+        binding.checkBoxDisponible.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                boolean check = binding.checkBoxDisponible.isChecked();
+                mViewModel.cambiarEstado(check);
+            }
+        });
+
         mViewModel.traerInmueble(getArguments());
 
         return binding.getRoot();

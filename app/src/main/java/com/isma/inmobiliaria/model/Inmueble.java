@@ -6,7 +6,10 @@ import java.io.Serializable;
 
 public class Inmueble implements Serializable {
 
-    // Usamos @SerializedName para asegurarnos de que Gson sepa qué campo del JSON
+    // --- MIEMBROS DE LA CLASE ---
+    // Las anotaciones @SerializedName("camelCase") son la clave.
+    // Le dicen a Gson cómo leer el JSON que envía tu API de .NET.
+
     @SerializedName("idInmuebles")
     private int idInmuebles;
 
@@ -20,7 +23,7 @@ public class Inmueble implements Serializable {
     private int superficie;
 
     @SerializedName("latitud")
-    private double latitud;
+    private double latitud; // 'decimal' en C# se convierte en 'double' en Java/JSON
 
     @SerializedName("longitud")
     private double longitud;
@@ -28,29 +31,44 @@ public class Inmueble implements Serializable {
     @SerializedName("idUsuario")
     private int idUsuario;
 
-
+    // Asume que también tienes una clase Usuario.java
     @SerializedName("duenio")
     private Usuario duenio;
 
     @SerializedName("idTipoInmueble")
     private int idTipoInmueble;
 
-
     @SerializedName("tipoInmueble")
     private String tipoInmueble;
 
     @SerializedName("precio")
-    private double precio;
+    private double precio; // 'decimal' en C# se convierte en 'double'
 
     @SerializedName("habilitado")
-    private boolean habilitado;
+    private boolean habilitado; // 'bool' en C# se convierte en 'boolean'
 
     @SerializedName("existe")
     private boolean existe;
 
-
     @SerializedName("imagenUrl")
     private String imagenUrl;
+
+    // --- CONSTRUCTORES ---
+
+    public Inmueble(String direccion, double precio, int ambientes, int superficie, String tipoInmueble, double latitud, double longitud, boolean habilitado) {
+        this.direccion = direccion;
+        this.precio = precio;
+        this.ambientes = ambientes;
+        this.superficie = superficie;
+        this.tipoInmueble = tipoInmueble;
+        this.latitud = latitud;
+        this.longitud = longitud;
+        this.habilitado = habilitado;
+    }
+
+
+    public Inmueble() {
+    }
 
 
     public int getIdInmuebles() {
@@ -165,3 +183,4 @@ public class Inmueble implements Serializable {
         this.imagenUrl = imagenUrl;
     }
 }
+

@@ -8,6 +8,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavAction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
@@ -44,6 +47,15 @@ public class InmueblesFragment extends Fragment {
 
             }
 
+        });
+        binding.fabAddInmueble.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                // Navegar a la pantalla de crear inmueble
+                NavController navController = Navigation.findNavController(view);
+                navController.navigate(R.id.action_inmueblesFragment_to_crearInmueble);
+            }
         });
         vm.leerInmuebles();
         return binding.getRoot();
