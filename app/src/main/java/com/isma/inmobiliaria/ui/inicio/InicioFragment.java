@@ -47,17 +47,10 @@ public class InicioFragment extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         miMapa = googleMap;
-
-
         LatLng ulp = new LatLng(-33.148953, -66.3078767);
-
-
         miMapa.addMarker(new MarkerOptions()
                 .position(ulp)
                 .title("Marcador en San Luis"));
-
-
         miMapa.moveCamera(CameraUpdateFactory.newLatLngZoom(ulp, 15));
-
     }
 }

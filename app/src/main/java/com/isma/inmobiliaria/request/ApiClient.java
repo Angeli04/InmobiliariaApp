@@ -31,6 +31,14 @@ import retrofit2.http.Part;
 public class ApiClient {
 
     public static final String URLBASE = "http://192.168.0.7:5164/";
+    private static ApiService apiService;
+    private static SharedPreferences sp;
+
+    private static void inicializarShared(Context context) {
+        if (sp == null) {
+            sp = context.getSharedPreferences("token", Context.MODE_PRIVATE);
+        }
+    }
 
 
     public static ApiService getApiService() {
@@ -93,6 +101,19 @@ public class ApiClient {
     public static String leerToken(Context context) {
         SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
         return preferences.getString("token", ""); // Devuelve "" si no se encuentra
+    }
+
+    public static void borrarToken(Context context) {
+        SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove("token");
+        editor.apply();
+    }
+
+    public static boolean hayTokenGuardado(Context context) {
+        inicializarShared(context);
+        String token = sp.getString("token", null);
+        return token != null && !token.isEmpty();
     }
 
 }

@@ -5,8 +5,9 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
+import androidx.biometric.BiometricManager;
 import com.isma.inmobiliaria.model.TokenResponse;
 import com.isma.inmobiliaria.request.ApiClient;
 
@@ -19,17 +20,44 @@ public class LoginActivityViewModel extends AndroidViewModel {
     // Los campos de LiveData deben ser privados
     private MutableLiveData<String> mMensaje = new MutableLiveData<>();
     private MutableLiveData<String> mError = new MutableLiveData<>();
+    private final MutableLiveData<Event<Boolean>> mNavigateToMain = new MutableLiveData<>();
+
+    private final MutableLiveData<Event<Boolean>> mShowBiometricButton = new MutableLiveData<>();
+    private final MutableLiveData<Event<Boolean>> mTriggerBiometricPrompt = new MutableLiveData<>();
+
+    private final MutableLiveData<Boolean> mLoading = new MutableLiveData<>(false);
+
+
+    public LiveData<Boolean> getmLoading() {
+        return mLoading;
+    }
+
+
+    public LiveData<Event<Boolean>> getNavigateToMain() {
+        return mNavigateToMain;
+    }
+
+    public LiveData<Event<Boolean>> getShowBiometricButton() {
+        return mShowBiometricButton;
+    }
+
+    public LiveData<Event<Boolean>> getTriggerBiometricPrompt() {
+        return mTriggerBiometricPrompt;
+    }
+
+
+
 
     public LoginActivityViewModel(@NonNull Application application) {
         super(application);
     }
 
     // Getters simplificados
-    public MutableLiveData<String> getError() {
+    public LiveData<String> getError() {
         return mError;
     }
 
-    public MutableLiveData<String> getMensaje() {
+    public LiveData<String> getMensaje() {
         return mMensaje;
     }
 
@@ -65,5 +93,60 @@ public class LoginActivityViewModel extends AndroidViewModel {
                 Log.e("LOGIN_VM", "Fallo en la llamada de login: " + t.getMessage());
             }
         });
+    }
+
+    public void checkBiometricSupport() {
+        if(!ApiClient.hayTokenGuardado(getApplication())){
+            mShowBiometricButton.postValue(new Event<>(false));
+            return;
+        }
+
+        BiometricManager biometricManager = BiometricManager.from(getApplication());
+        int canAuthenticate = biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG);
+
+        if (canAuthenticate == BiometricManager.BIOMETRIC_SUCCESS) {
+            mShowBiometricButton.postValue(new Event<>(true));
+        } else {
+            mShowBiometricButton.postValue(new Event<>(false));
+        }
+    }
+
+    //click en el boton de guella, muestra dialogo de biometria
+    public void onBiometricLoginClicked() {
+        mTriggerBiometricPrompt.postValue(new Event<>(true));
+    }
+
+    // exitoso login con huella
+    public void onBiometricAuthenticationSucceeded() {
+        // El usuario es el dueño del teléfono.
+        // Como ya comprobamos que había un token, navegamos a Main.
+        mNavigateToMain.postValue(new Event<>(true));
+    }
+
+    public void onBiometricAuthenticationFailed() {
+        mError.postValue("Huella no reconocida");
+    }
+
+    public void onBiometricAuthenticationError(CharSequence errString) {
+        mError.postValue("Autenticación cancelada: " + errString.toString());
+    }
+
+
+    public static class Event<T> {
+        private T content;
+        private boolean hasBeenHandled = false;
+
+        public Event(T content) { this.content = content; }
+
+        public T getContentIfNotHandled() {
+            if (hasBeenHandled) {
+                return null;
+            } else {
+                hasBeenHandled = true;
+                return content;
+            }
+        }
+
+        public T peekContent() { return content; }
     }
 }
