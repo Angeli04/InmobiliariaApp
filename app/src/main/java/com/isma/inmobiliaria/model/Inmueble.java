@@ -6,9 +6,6 @@ import java.io.Serializable;
 
 public class Inmueble implements Serializable {
 
-    // --- MIEMBROS DE LA CLASE ---
-    // Las anotaciones @SerializedName("camelCase") son la clave.
-    // Le dicen a Gson cómo leer el JSON que envía tu API de .NET.
 
     @SerializedName("idInmuebles")
     private int idInmuebles;
@@ -23,7 +20,7 @@ public class Inmueble implements Serializable {
     private int superficie;
 
     @SerializedName("latitud")
-    private double latitud; // 'decimal' en C# se convierte en 'double' en Java/JSON
+    private double latitud;
 
     @SerializedName("longitud")
     private double longitud;

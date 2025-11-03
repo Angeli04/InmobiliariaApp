@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-  El layout raíz es ahora un ScrollView.
-  Esto permite que todo el contenido se desplace si no cabe en la pantalla.
--->
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,10 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.inmuebles.CrearInmueble">
 
-    <!--
-      Un único ConstraintLayout dentro del ScrollView
-      que contiene todos los elementos del formulario.
-    -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_layout_crear"
         android:layout_width="match_parent"

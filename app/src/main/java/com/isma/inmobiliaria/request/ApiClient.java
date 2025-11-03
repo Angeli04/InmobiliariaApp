@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.isma.inmobiliaria.model.Inmueble;
+import com.isma.inmobiliaria.model.TipoInmueble;
 import com.isma.inmobiliaria.model.TokenResponse;
 import com.isma.inmobiliaria.model.Usuario;
 
@@ -29,7 +30,6 @@ import retrofit2.http.Part;
 
 public class ApiClient {
 
-    // ANTES:
     public static final String URLBASE = "http://192.168.0.7:5164/";
 
 
@@ -68,16 +68,21 @@ public class ApiClient {
         @GET("api/Auth/listarInmueblesCompletos")
         Call<List<Inmueble>> listarInmueblesCompletos(@Header("Authorization") String token);
 
+
+
+        @GET("api/Auth/listarTipos")
+        Call<List<TipoInmueble>> listarTipos(@Header("Authorization") String token);
+
         @Multipart
-        @POST("api/Auth/crearInmueble")
-        Call<Inmueble> crearInmueble(@Header("Authorization") String token,
-                                      @Part MultipartBody.Part imagen,
-                                      @Part("inmueble") RequestBody inmueble);
-
-
+        @POST("api/Auth/altaInmueble")
+        Call<Inmueble> altaInmueble(
+                @Header("Authorization") String token,
+                @Part MultipartBody.Part imagen,
+                @Part("inmuebleJson") RequestBody inmueble
+        );
     }
 
-    // token en shared preferences
+
     public static void guardarToken(Context context, String token) {
         SharedPreferences preferences = context.getSharedPreferences("token", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();

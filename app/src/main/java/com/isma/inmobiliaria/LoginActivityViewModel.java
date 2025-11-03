@@ -50,7 +50,7 @@ public class LoginActivityViewModel extends AndroidViewModel {
                     String tokenLimpio = response.body().getToken();
                     ApiClient.guardarToken(getApplication(), tokenLimpio);
                     Log.d("LOGIN_VM", "Token guardado exitosamente.");
-
+                    Log.e("ViewModelll", "Error al guardar: " + tokenLimpio);
                     mMensaje.postValue("Login exitoso");
 
                 } else {
