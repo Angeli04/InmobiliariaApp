@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="12dp"
+    app:cardElevation="6dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Icono de Persona --><ImageView
+        android:id="@+id/iconPerson"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        app:srcCompat="@drawable/icon_profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tvInquilinoNombre"
+        app:layout_constraintBottom_toBottomOf="@id/tvInquilinoNombre"
+        app:tint="?attr/colorPrimary"
+        android:contentDescription="Icono de persona" />
+
+        <!-- Nombre del Inquilino (Apellido, Nombre) --><TextView
+        android:id="@+id/tvInquilinoNombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="?android:attr/textColorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iconPerson"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Perez, Carmela" />
+
+        <!-- Línea Divisoria --><View
+        android:id="@+id/divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:background="?android:attr/dividerVertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvInquilinoNombre" />
+
+        <!-- DNI --><ImageView
+        android:id="@+id/iconDni"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@drawable/ico_badge"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        app:tint="?android:attr/textColorSecondary"
+        android:contentDescription="Icono de DNI" />
+
+        <TextView
+            android:id="@+id/tvLabelDni"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="DNI:"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintStart_toEndOf="@id/iconDni"
+            app:layout_constraintTop_toTopOf="@id/iconDni"
+            app:layout_constraintBottom_toBottomOf="@id/iconDni" />
+
+        <TextView
+            android:id="@+id/tvInquilinoDni"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvLabelDni"
+            app:layout_constraintTop_toTopOf="@id/tvLabelDni"
+            app:layout_constraintBottom_toBottomOf="@id/tvLabelDni"
+            tools:text="546373748" />
+
+        <!-- Teléfono --><ImageView
+        android:id="@+id/iconPhone"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        app:srcCompat="@drawable/ic_phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iconDni"
+        app:tint="?android:attr/textColorSecondary"
+        android:contentDescription="Icono de teléfono" />
+
+        <TextView
+            android:id="@+id/tvLabelTelefono"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Teléfono:"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintStart_toEndOf="@id/iconPhone"
+            app:layout_constraintTop_toTopOf="@id/iconPhone"
+            app:layout_constraintBottom_toBottomOf="@id/iconPhone" />
+
+        <TextView
+            android:id="@+id/tvInquilinoTelefono"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvLabelTelefono"
+            app:layout_constraintTop_toTopOf="@id/tvLabelTelefono"
+            app:layout_constraintBottom_toBottomOf="@id/tvLabelTelefono"
+            tools:text="546373747" />
+
+        <!-- Email --><ImageView
+        android:id="@+id/iconEmail"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="8dp"
+        app:srcCompat="@drawable/ic_email"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iconPhone"
+        app:tint="?android:attr/textColorSecondary"
+        android:contentDescription="Icono de email" />
+
+        <TextView
+            android:id="@+id/tvLabelEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Email:"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintStart_toEndOf="@id/iconEmail"
+            app:layout_constraintTop_toTopOf="@id/iconEmail"
+            app:layout_constraintBottom_toBottomOf="@id/iconEmail" />
+
+        <TextView
+            android:id="@+id/tvInquilinoEmail"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvLabelEmail"
+            app:layout_constraintTop_toTopOf="@id/tvLabelEmail"
+            app:layout_constraintBottom_toBottomOf="@id/tvLabelEmail"
+            tools:text="arubira60@gmail.com" />
+
+        <!-- Propiedad que Alquila --><ImageView
+        android:id="@+id/iconHome"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@drawable/ic_home"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iconEmail"
+        app:tint="?attr/colorPrimary"
+        android:contentDescription="Icono de casa" />
+
+        <TextView
+            android:id="@+id/tvLabelPropiedad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:text="Propiedad Alquilada:"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintStart_toEndOf="@id/iconHome"
+            app:layout_constraintTop_toTopOf="@id/iconHome"
+            app:layout_constraintBottom_toBottomOf="@id/iconHome" />
+
+        <TextView
+            android:id="@+id/tvInquilinoDireccion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tvLabelPropiedad"
+            app:layout_constraintTop_toTopOf="@id/tvLabelPropiedad"
+            app:layout_constraintBottom_toBottomOf="@id/tvLabelPropiedad"
+            tools:text="San Martin 3456" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+

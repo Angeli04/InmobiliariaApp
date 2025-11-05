@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.isma.inmobiliaria.model.Inmueble;
+import com.isma.inmobiliaria.model.InquilinoAlquilerDto;
 import com.isma.inmobiliaria.model.TipoInmueble;
 import com.isma.inmobiliaria.model.TokenResponse;
 import com.isma.inmobiliaria.model.Usuario;
@@ -88,6 +89,10 @@ public class ApiClient {
                 @Part MultipartBody.Part imagen,
                 @Part("inmuebleJson") RequestBody inmueble
         );
+
+        @GET("api/Auth/misInquilinos")
+        Call<List<InquilinoAlquilerDto>> misInquilinos(@Header("Authorization") String token);
+
     }
 
 
