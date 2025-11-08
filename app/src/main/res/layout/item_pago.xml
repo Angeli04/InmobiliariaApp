@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="10dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginEnd="10dp"
+    android:layout_marginBottom="5dp"
+    app:cardBackgroundColor="@android:color/white"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp"
+    app:contentPadding="20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <!-- Columna 1: Número de Cuota -->
+        <TextView
+            android:id="@+id/tvLabelCuota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CUOTA"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvNumeroCuota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textColor="?attr/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvLabelCuota"
+            tools:text="3" />
+
+        <!-- Columna 2: Pila de Detalles -->
+
+        <!-- Importe (Existente) -->
+        <ImageView
+            android:id="@+id/iconImporte"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginStart="40dp"
+            app:srcCompat="@drawable/ic_pay"
+            app:tint="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toEndOf="@id/tvNumeroCuota"
+            app:layout_constraintTop_toTopOf="@id/tvImportePago"
+            app:layout_constraintBottom_toBottomOf="@id/tvImportePago"
+            android:contentDescription="Icono de importe" />
+
+        <TextView
+            android:id="@+id/tvImportePago"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconImporte"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="$ 560.000" />
+
+        <!-- Fecha de Pago (Existente) -->
+        <ImageView
+            android:id="@+id/iconFecha"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/ic_calendar"
+            app:tint="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="@id/iconImporte"
+            app:layout_constraintTop_toBottomOf="@id/tvImportePago"
+            android:contentDescription="Icono de fecha" />
+
+        <TextView
+            android:id="@+id/tvFechaPago"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconFecha"
+            app:layout_constraintTop_toTopOf="@id/iconFecha"
+            app:layout_constraintBottom_toBottomOf="@id/iconFecha"
+            tools:text="Pagado el 01/01/2026" />
+
+        <!-- Concepto (NUEVO) -->
+        <ImageView
+            android:id="@+id/iconConcepto"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="12dp"
+            app:srcCompat="@drawable/ic_rent"
+            app:tint="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="@id/iconFecha"
+            app:layout_constraintTop_toBottomOf="@id/tvFechaPago"
+            android:contentDescription="Icono de concepto" />
+
+        <TextView
+            android:id="@+id/tvConcepto"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconConcepto"
+            app:layout_constraintTop_toTopOf="@id/iconConcepto"
+            app:layout_constraintBottom_toBottomOf="@id/iconConcepto"
+            tools:text="Alquiler" />
+
+        <!-- Mes Pagado (NUEVO) -->
+        <ImageView
+            android:id="@+id/iconMesPago"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="12dp"
+            app:srcCompat="@drawable/ic_month"
+            app:tint="?android:attr/textColorSecondary"
+            app:layout_constraintStart_toStartOf="@id/iconConcepto"
+            app:layout_constraintTop_toBottomOf="@id/tvConcepto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:contentDescription="Icono de mes pagado" />
+
+        <TextView
+            android:id="@+id/tvMesPago"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+            android:textColor="?android:attr/textColorSecondary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iconMesPago"
+            app:layout_constraintTop_toTopOf="@id/iconMesPago"
+            app:layout_constraintBottom_toBottomOf="@id/iconMesPago"
+            tools:text="Enero 2026" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+

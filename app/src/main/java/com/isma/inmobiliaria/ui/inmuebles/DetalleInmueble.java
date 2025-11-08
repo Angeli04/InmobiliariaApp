@@ -16,6 +16,9 @@ import com.bumptech.glide.Glide;
 import com.isma.inmobiliaria.R;
 import com.isma.inmobiliaria.databinding.FragmentDetalleInmuebleBinding;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class DetalleInmueble extends Fragment {
 
     private DetalleInmuebleViewModel mViewModel;
@@ -33,7 +36,8 @@ public class DetalleInmueble extends Fragment {
 
         mViewModel.getMinmueble().observe(getViewLifecycleOwner(), inmueble -> {
             binding.tvId.setText(inmueble.getIdInmuebles() + "");
-            binding.tvValor.setText(inmueble.getPrecio() + "");
+            NumberFormat formatear = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));
+            binding.tvValor.setText(formatear.format(inmueble.getPrecio()));
             binding.tvUso.setText(inmueble.getTipoInmueble()+"");
             binding.tvDireccionDetalle.setText(inmueble.getDireccion());
             binding.tvAmbientes.setText(inmueble.getAmbientes() + "");

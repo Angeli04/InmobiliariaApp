@@ -17,8 +17,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.isma.inmobiliaria.R;
 import com.isma.inmobiliaria.model.Inmueble;
-
+import java.text.NumberFormat;
 import java.util.List;
+import java.util.Locale;
 
 public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.InmuebleViewHolder> {
 
@@ -45,7 +46,8 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
         String urls = "http://192.168.0.7:5164";
         Inmueble i = inmuebleList.get(position);
         holder.tvDireccion.setText(i.getDireccion());
-        holder.tvPrecio.setText("$" + i.getPrecio() + "");
+        NumberFormat formatear = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));
+        holder.tvPrecio.setText(formatear.format(i.getPrecio()));
         Glide.with(context)
                 .load(urls + i.getImagenUrl())
                 .placeholder(R.drawable.ic_no_image)

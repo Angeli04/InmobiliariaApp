@@ -37,7 +37,11 @@
         android:id="@+id/contratosFragment"
         android:name="com.isma.inmobiliaria.ui.contratos.ContratosFragment"
         android:label="Contratos"
-        tools:layout="@layout/fragment_contratos" />
+        tools:layout="@layout/fragment_contratos" >
+        <action
+            android:id="@+id/action_contratosFragment_to_pagosFragment"
+            app:destination="@id/pagosFragment" />
+    </fragment>
     <fragment
         android:id="@+id/logOutFragment"
         android:name="com.isma.inmobiliaria.ui.logout.LogOutFragment"
@@ -53,5 +57,10 @@
         android:name="com.isma.inmobiliaria.ui.inmuebles.CrearInmueble"
         android:label="Crear inmueble"
         tools:layout="@layout/fragment_crear_inmueble" />
+    <fragment
+        android:id="@+id/pagosFragment"
+        android:name="com.isma.inmobiliaria.ui.contratos.PagosFragment"
+        android:label="Pagos"
+        tools:layout="@layout/fragment_pagos" />
 
 </navigation>

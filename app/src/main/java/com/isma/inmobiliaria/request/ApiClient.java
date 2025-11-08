@@ -5,8 +5,10 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.isma.inmobiliaria.model.ContratoDetalleDto;
 import com.isma.inmobiliaria.model.Inmueble;
 import com.isma.inmobiliaria.model.InquilinoAlquilerDto;
+import com.isma.inmobiliaria.model.Pago;
 import com.isma.inmobiliaria.model.TipoInmueble;
 import com.isma.inmobiliaria.model.TokenResponse;
 import com.isma.inmobiliaria.model.Usuario;
@@ -28,10 +30,11 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
+import retrofit2.http.Path;
 
 public class ApiClient {
 
-    public static final String URLBASE = "http://192.168.0.7:5164/";
+    public static final String URLBASE = "http://192.168.0.5:5164/";
     private static ApiService apiService;
     private static SharedPreferences sp;
 
@@ -93,6 +96,11 @@ public class ApiClient {
         @GET("api/Auth/misInquilinos")
         Call<List<InquilinoAlquilerDto>> misInquilinos(@Header("Authorization") String token);
 
+        @GET("api/Auth/contratosVigentes")
+        Call<List<ContratoDetalleDto>> contratosVigentes(@Header("Authorization") String token);
+
+        @GET("api/Auth/porcontrato/{idContrato}")
+        Call<List<Pago>> pagosPorContrato(@Header("Authorization") String token, @Path("idContrato")int idContrato);
     }
 
 

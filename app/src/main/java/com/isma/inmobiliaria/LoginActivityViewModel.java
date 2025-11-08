@@ -17,70 +17,59 @@ import retrofit2.Response;
 
 public class LoginActivityViewModel extends AndroidViewModel {
 
-    // Los campos de LiveData deben ser privados
-    private MutableLiveData<String> mMensaje = new MutableLiveData<>();
-    private MutableLiveData<String> mError = new MutableLiveData<>();
+    // --- LiveData para Órdenes/Eventos ---
+    private final MutableLiveData<String> mError = new MutableLiveData<>();
     private final MutableLiveData<Event<Boolean>> mNavigateToMain = new MutableLiveData<>();
-
-    private final MutableLiveData<Event<Boolean>> mShowBiometricButton = new MutableLiveData<>();
     private final MutableLiveData<Event<Boolean>> mTriggerBiometricPrompt = new MutableLiveData<>();
 
-    private final MutableLiveData<Boolean> mLoading = new MutableLiveData<>(false);
+    // --- 1. CAMBIO: Separamos Loading en dos órdenes ---
+    private final MutableLiveData<Event<Void>> mShowLoading = new MutableLiveData<>();
+    private final MutableLiveData<Event<Void>> mHideLoading = new MutableLiveData<>();
 
-
-    public LiveData<Boolean> getmLoading() {
-        return mLoading;
-    }
-
-
-    public LiveData<Event<Boolean>> getNavigateToMain() {
-        return mNavigateToMain;
-    }
-
-    public LiveData<Event<Boolean>> getShowBiometricButton() {
-        return mShowBiometricButton;
-    }
-
-    public LiveData<Event<Boolean>> getTriggerBiometricPrompt() {
-        return mTriggerBiometricPrompt;
-    }
-
-
+    // --- 2. CAMBIO: Separamos el botón en dos órdenes ---
+    private final MutableLiveData<Event<Void>> mShowBiometricButton = new MutableLiveData<>();
+    private final MutableLiveData<Event<Void>> mHideBiometricButton = new MutableLiveData<>();
 
 
     public LoginActivityViewModel(@NonNull Application application) {
         super(application);
     }
 
-    // Getters simplificados
-    public LiveData<String> getError() {
-        return mError;
-    }
+    // --- Getters para que la Activity (Vista) observe ---
+    public LiveData<String> getmError() { return mError; }
+    public LiveData<Event<Boolean>> getNavigateToMain() { return mNavigateToMain; }
+    public LiveData<Event<Boolean>> getTriggerBiometricPrompt() { return mTriggerBiometricPrompt; }
 
-    public LiveData<String> getMensaje() {
-        return mMensaje;
-    }
+    // --- 3. CAMBIO: Nuevos Getters ---
+    public LiveData<Event<Void>> getShowLoading() { return mShowLoading; }
+    public LiveData<Event<Void>> getHideLoading() { return mHideLoading; }
+    public LiveData<Event<Void>> getShowBiometricButton() { return mShowBiometricButton; }
+    public LiveData<Event<Void>> getHideBiometricButton() { return mHideBiometricButton; }
 
+
+    // --- LÓGICA DE LOGIN NORMAL ---
     public void iniciarSesion(String email, String password) {
-
         if (email.isEmpty() || password.isEmpty()) {
             mError.postValue("Por favor, complete todos los campos.");
             return;
         }
 
+        mShowLoading.postValue(new Event<>(null)); // 4. CAMBIO: Orden de "Mostrar"
+
         ApiClient.ApiService api = ApiClient.getApiService();
-        Call<TokenResponse> call = ApiClient.getApiService().login(email, password);
+        //
+        Call<TokenResponse> call = api.login(email, password);
+
+
         call.enqueue(new Callback<TokenResponse>() {
             @Override
-            public void onResponse(Call<TokenResponse> call, Response<TokenResponse> response) {
+            public void onResponse(@NonNull Call<TokenResponse> call, @NonNull Response<TokenResponse> response) {
+                mHideLoading.postValue(new Event<>(null)); // 5. CAMBIO: Orden de "Ocultar"
                 if (response.isSuccessful() && response.body() != null) {
-
                     String tokenLimpio = response.body().getToken();
                     ApiClient.guardarToken(getApplication(), tokenLimpio);
                     Log.d("LOGIN_VM", "Token guardado exitosamente.");
-                    Log.e("ViewModelll", "Error al guardar: " + tokenLimpio);
-                    mMensaje.postValue("Login exitoso");
-
+                    mNavigateToMain.postValue(new Event<>(true));
                 } else {
                     Log.d("LOGIN_VM", "Login no exitoso. Código: " + response.code());
                     mError.postValue("Credenciales incorrectas");
@@ -88,16 +77,18 @@ public class LoginActivityViewModel extends AndroidViewModel {
             }
 
             @Override
-            public void onFailure(Call<TokenResponse> call, Throwable t) {
-                // Manejar fallo de conexión
+            public void onFailure(@NonNull Call<TokenResponse> call, @NonNull Throwable t) {
+                mHideLoading.postValue(new Event<>(null)); // 6. CAMBIO: Orden de "Ocultar"
                 Log.e("LOGIN_VM", "Fallo en la llamada de login: " + t.getMessage());
+                mError.postValue("Fallo de conexión: " + t.getMessage());
             }
         });
     }
 
+    // --- LÓGICA DE BIOMETRÍA ---
     public void checkBiometricSupport() {
-        if(!ApiClient.hayTokenGuardado(getApplication())){
-            mShowBiometricButton.postValue(new Event<>(false));
+        if (!ApiClient.hayTokenGuardado(getApplication())) {
+            mHideBiometricButton.postValue(new Event<>(null)); // 7. CAMBIO
             return;
         }
 
@@ -105,21 +96,17 @@ public class LoginActivityViewModel extends AndroidViewModel {
         int canAuthenticate = biometricManager.canAuthenticate(BiometricManager.Authenticators.BIOMETRIC_STRONG);
 
         if (canAuthenticate == BiometricManager.BIOMETRIC_SUCCESS) {
-            mShowBiometricButton.postValue(new Event<>(true));
+            mShowBiometricButton.postValue(new Event<>(null)); // 8. CAMBIO
         } else {
-            mShowBiometricButton.postValue(new Event<>(false));
+            mHideBiometricButton.postValue(new Event<>(null)); // 9. CAMBIO
         }
     }
 
-    //click en el boton de guella, muestra dialogo de biometria
     public void onBiometricLoginClicked() {
         mTriggerBiometricPrompt.postValue(new Event<>(true));
     }
 
-    // exitoso login con huella
     public void onBiometricAuthenticationSucceeded() {
-        // El usuario es el dueño del teléfono.
-        // Como ya comprobamos que había un token, navegamos a Main.
         mNavigateToMain.postValue(new Event<>(true));
     }
 
@@ -131,7 +118,7 @@ public class LoginActivityViewModel extends AndroidViewModel {
         mError.postValue("Autenticación cancelada: " + errString.toString());
     }
 
-
+    // --- Clase Auxiliar para Eventos ---
     public static class Event<T> {
         private T content;
         private boolean hasBeenHandled = false;
