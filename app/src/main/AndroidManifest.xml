@@ -30,7 +30,7 @@
         android:theme="@style/Theme.Inmobiliaria">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBRicsK1K2_P6KCzKCOKccDl48i-nTj_7U" />
+            android:value="" />
         <activity
             android:name=".LoginActivity"
             android:exported="true">

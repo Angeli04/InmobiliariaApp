@@ -17,12 +17,23 @@ android {
     }
 
     buildTypes {
+        // Este es el que usas para desarrollar
+        debug {
+            // Aquí defines la variable para tu entorno de desarrollo
+            buildConfigField("String", "BASE_URL", "\"http://192.168.0.5:5164\"")
+        }
+
+        // Este es el que usas para generar el APK de producción
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+
+            // Aquí defines la variable para tu entorno de producción
+            // (Si aún no tienes una URL de producción, puedes poner la misma de debug por ahora)
+            buildConfigField("String", "BASE_URL", "\"http://192.168.0.5:5164\"")
         }
     }
     compileOptions {
@@ -31,6 +42,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 

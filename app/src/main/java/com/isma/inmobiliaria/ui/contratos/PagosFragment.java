@@ -52,7 +52,7 @@ public class PagosFragment extends Fragment {
     }
 
     private void setupObservers() {
-        // Observador para la LISTA DE PAGOS (actualiza el RecyclerView)
+
         mViewModel.getPagos().observe(getViewLifecycleOwner(), new Observer<List<Pago>>() {
             @Override
             public void onChanged(List<Pago> pagos) {
@@ -61,8 +61,6 @@ public class PagosFragment extends Fragment {
             }
         });
 
-
-        // Observador para los ERRORES
         mViewModel.getError().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(String error) {

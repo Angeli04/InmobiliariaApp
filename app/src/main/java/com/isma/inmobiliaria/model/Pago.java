@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 public class Pago implements Serializable {
 
-    // Asumo que la tabla 'pagos' tiene una Clave Primaria 'idPago'
+
     @SerializedName("idPago")
     private int idPago;
 
@@ -14,7 +14,7 @@ public class Pago implements Serializable {
     private int idContrato;
 
     @SerializedName("fechaPago")
-    private String fechaPago; // "2025-12-01T00:00:00"
+    private String fechaPago;
 
     @SerializedName("importe")
     private double importe;

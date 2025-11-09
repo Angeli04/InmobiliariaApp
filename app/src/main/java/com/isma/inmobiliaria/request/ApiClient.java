@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.isma.inmobiliaria.BuildConfig;
 import com.isma.inmobiliaria.model.ContratoDetalleDto;
 import com.isma.inmobiliaria.model.Inmueble;
 import com.isma.inmobiliaria.model.InquilinoAlquilerDto;
@@ -34,7 +35,8 @@ import retrofit2.http.Path;
 
 public class ApiClient {
 
-    public static final String URLBASE = "http://192.168.0.5:5164/";
+    // url que se trae del build
+    public static final String URLBASE = BuildConfig.BASE_URL;
     private static ApiService apiService;
     private static SharedPreferences sp;
 
@@ -65,7 +67,7 @@ public class ApiClient {
         Call<TokenResponse> login(@Field("email") String email, @Field("password") String password);
 
 
-        @GET("api/Auth/perfil") // OJO: Asegúrate que la ruta sea la correcta ("api/Auth/perfil")
+        @GET("api/Auth/perfil")
         Call<Usuario> getUsuario(@Header("Authorization") String token);
 
         @POST("api/Auth/actualizar")
@@ -123,6 +125,7 @@ public class ApiClient {
         editor.apply();
     }
 
+    // para usar biometria
     public static boolean hayTokenGuardado(Context context) {
         inicializarShared(context);
         String token = sp.getString("token", null);

@@ -28,7 +28,7 @@ public class Inmueble implements Serializable {
     @SerializedName("idUsuario")
     private int idUsuario;
 
-    // Asume que también tienes una clase Usuario.java
+
     @SerializedName("duenio")
     private Usuario duenio;
 
@@ -39,18 +39,16 @@ public class Inmueble implements Serializable {
     private String tipoInmueble;
 
     @SerializedName("precio")
-    private double precio; // 'decimal' en C# se convierte en 'double'
+    private double precio;
 
     @SerializedName("habilitado")
-    private boolean habilitado; // 'bool' en C# se convierte en 'boolean'
+    private boolean habilitado;
 
     @SerializedName("existe")
     private boolean existe;
 
     @SerializedName("imagenUrl")
     private String imagenUrl;
-
-    // --- CONSTRUCTORES ---
 
     public Inmueble(String direccion, double precio, int ambientes, int superficie, String tipoInmueble, double latitud, double longitud, boolean habilitado) {
         this.direccion = direccion;

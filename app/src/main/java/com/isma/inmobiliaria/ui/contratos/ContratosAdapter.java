@@ -71,15 +71,9 @@ public class ContratosAdapter  extends RecyclerView.Adapter<ContratosAdapter.Vie
 
 
         holder.btnVerPagos.setOnClickListener(v -> {
-            // Prepara el ID del contrato para enviarlo al siguiente fragmento
             Bundle bundle = new Bundle();
             bundle.putInt("idContrato", dto.getIdContrato());
-
-            // Navega al Fragmento de Pagos
-            // (Asegúrate de que 'action_contratosFragment_to_pagosFragment' exista en tu nav_graph.xml)
             Navigation.findNavController(v).navigate(R.id.action_contratosFragment_to_pagosFragment, bundle);
-
-            // Toast.makeText(context, "Ver pagos del contrato: " + dto.getIdContrato(), Toast.LENGTH_SHORT).show();
         });
 
     }
@@ -121,16 +115,17 @@ public class ContratosAdapter  extends RecyclerView.Adapter<ContratosAdapter.Vie
     private String formatearFecha(String fechaIso) {
         if (fechaIso == null) return "N/A";
         try {
-            // Define el formato de ENTRADA (ISO)
+
             SimpleDateFormat inputFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
-            // Define el formato de SALIDA (Legible)
+
             SimpleDateFormat outputFormatter = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
             Date date = inputFormatter.parse(fechaIso);
             return outputFormatter.format(date);
+            // si se rompe devuelve la fecha original
         } catch (ParseException e) {
             e.printStackTrace();
-            return fechaIso; // Devuelve la fecha original si falla el parseo
+            return fechaIso;
         }
     }
 }

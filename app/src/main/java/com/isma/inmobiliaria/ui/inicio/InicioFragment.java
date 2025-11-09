@@ -42,7 +42,7 @@ public class InicioFragment extends Fragment implements OnMapReadyCallback {
     private ActivityResultLauncher<String> requestPermissionLauncher;
 
 
-    private ShakeDetector shakeDetector; // <<< REEMPLAZA A SensorManager
+    private ShakeDetector shakeDetector;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -51,6 +51,7 @@ public class InicioFragment extends Fragment implements OnMapReadyCallback {
         requestPermissionLauncher = registerForActivityResult(
                 new ActivityResultContracts.RequestPermission(),
                 isGranted -> {
+                    // if para los permisos
                     if (isGranted) {
                         Log.d("InicioFragment", "Permiso CALL_PHONE CONCEDIDO.");
                         realizarLlamada();
@@ -80,11 +81,13 @@ public class InicioFragment extends Fragment implements OnMapReadyCallback {
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
+        // if para el mapa
         if (mapFragment != null) {
             mapFragment.getMapAsync(this);
         }
 
         vm.getIniciarLlamada().observe(getViewLifecycleOwner(), event -> {
+
             if (event.getContentIfNotHandled() != null) {
                 Log.d("InicioFragment", "Evento de sacudida recibido del VM. Pidiendo permiso...");
                 pedirPermisoYLlamar(); // Esto es Lógica de UI (permisos)

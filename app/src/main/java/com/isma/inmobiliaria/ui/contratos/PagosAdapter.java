@@ -45,22 +45,11 @@ public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Pago pago = listaPagos.get(position);
 
-        // --- 4. Rellenar los datos ---
-
-        // Número de Cuota
         holder.tvNunmeroCuota.setText(String.valueOf(pago.getNumeroCuota()));
-
-        // Importe (Formateado como moneda)
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));
         holder.tvImportePago.setText(formatter.format(pago.getImporte()));
-
-        // Fecha de Pago (Formateada)
         holder.tvFechaPago.setText("Pagado el " + formatearFecha(pago.getFechaPago()));
-
-        // Concepto
         holder.tvConcepto.setText(pago.getConcepto());
-
-        // Mes Pagado (Simplificado: usamos el campo que viene de la API)
         holder.tvMesPago.setText(formatearMesAnio(pago.getMesPago(), pago.getFechaPago()));
     }
 
@@ -104,24 +93,21 @@ public class PagosAdapter extends RecyclerView.Adapter<PagosAdapter.ViewHolder> 
     private String formatearMesAnio(int mes, String fechaIso) {
         if (fechaIso == null) return "N/A";
         try {
-            // Nombres de los meses
+
             String[] nombresMeses = {
                     "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
                     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
             };
 
-            // Obtener el año de la fecha de pago
+
             SimpleDateFormat input = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault());
             Date date = input.parse(fechaIso);
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             int anio = cal.get(Calendar.YEAR);
-
-            // Obtener el nombre del mes (mes es 1-12, el array es 0-11)
             String nombreMes = nombresMeses[mes - 1];
 
             return nombreMes + " " + anio;
-
         } catch (Exception e) {
             return "Mes " + mes;
         }

@@ -98,7 +98,7 @@ public class CrearInmuebleViewModel extends AndroidViewModel {
         }
     }
 
-    //funcion para traer a traves de la api los tipos de inmueble
+
     public void traerTipos(){
         String token = ApiClient.leerToken(getApplication());
         ApiClient.ApiService api = ApiClient.getApiService();

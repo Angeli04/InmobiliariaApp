@@ -10,16 +10,15 @@ public class ContratoDetalleDto implements Serializable {
     private int idContrato;
 
     @SerializedName("monto")
-    private double monto; // decimal (C#) o 560000 (JSON) -> double (Java)
+    private double monto;
 
     @SerializedName("fechaDesde")
-    private String fechaDesde; // "2025-12-01T00:00:00" -> String
+    private String fechaDesde;
 
     @SerializedName("fechaHasta")
-    private String fechaHasta; // "2026-02-01T00:00:00" -> String
-
+    private String fechaHasta;
     @SerializedName("vigente")
-    private int vigente; // 1 -> int
+    private int vigente;
 
     @SerializedName("cantidadCuotas")
     private int cantidadCuotas;
@@ -29,9 +28,6 @@ public class ContratoDetalleDto implements Serializable {
 
     @SerializedName("direccionInmueble")
     private String direccionInmueble;
-
-    // --- Getters y Setters ---
-    // (Necesarios para que el Adapter y el código de la UI los lean)
 
 
     public int getIdContrato() {

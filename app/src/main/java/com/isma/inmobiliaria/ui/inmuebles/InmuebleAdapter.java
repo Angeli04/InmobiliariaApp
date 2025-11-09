@@ -15,6 +15,7 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.isma.inmobiliaria.BuildConfig;
 import com.isma.inmobiliaria.R;
 import com.isma.inmobiliaria.model.Inmueble;
 import java.text.NumberFormat;
@@ -43,7 +44,7 @@ public class InmuebleAdapter extends RecyclerView.Adapter<InmuebleAdapter.Inmueb
 
     @Override
     public void onBindViewHolder(@NonNull InmuebleViewHolder holder, int position) {
-        String urls = "http://192.168.0.7:5164";
+        String urls = BuildConfig.BASE_URL;
         Inmueble i = inmuebleList.get(position);
         holder.tvDireccion.setText(i.getDireccion());
         NumberFormat formatear = NumberFormat.getCurrencyInstance(new Locale("es", "AR"));

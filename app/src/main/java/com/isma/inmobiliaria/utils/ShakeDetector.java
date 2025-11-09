@@ -6,7 +6,6 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.util.Log;
-
 import com.isma.inmobiliaria.ui.inicio.InicioViewModel;
 
 public class ShakeDetector implements SensorEventListener {
@@ -55,17 +54,14 @@ public class ShakeDetector implements SensorEventListener {
     public void onSensorChanged(SensorEvent event) {
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
-            // 1. Aislar la gravedad
             gravity[0] = ALPHA * gravity[0] + (1 - ALPHA) * event.values[0];
             gravity[1] = ALPHA * gravity[1] + (1 - ALPHA) * event.values[1];
             gravity[2] = ALPHA * gravity[2] + (1 - ALPHA) * event.values[2];
 
-            // 2. Obtener la aceleración lineal
             linearAcceleration[0] = event.values[0] - gravity[0];
             linearAcceleration[1] = event.values[1] - gravity[1];
             linearAcceleration[2] = event.values[2] - gravity[2];
 
-            // 3. Calcular la magnitud
             float accel = (float) Math.sqrt(
                     linearAcceleration[0] * linearAcceleration[0] +
                             linearAcceleration[1] * linearAcceleration[1] +
@@ -75,10 +71,7 @@ public class ShakeDetector implements SensorEventListener {
             long currentTime = System.currentTimeMillis();
             if (accel > SHAKE_THRESHOLD_GRAVITY && (currentTime - lastShakeTime) > SHAKE_COOLDOWN_MS) {
                 lastShakeTime = currentTime;
-
                 Log.d("ShakeDetector", "¡SACUDIDA FÍSICA DETECTADA! Notificando al ViewModel...");
-
-                // 5. Notificar al ViewModel (¡La conexión MVVM!)
                 viewModel.onShakeDetectado();
             }
         }

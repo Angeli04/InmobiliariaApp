@@ -40,7 +40,7 @@ public class LogOutFragment extends Fragment {
 
         mViewModel.getCerrarSesion().observe(getViewLifecycleOwner(), cerrarSesion -> {
             if (cerrarSesion != null && cerrarSesion) {
-               // navegamos a la activity del login
+
                 Intent intent = new Intent(getContext(), LoginActivity.class);
                 startActivity(intent);
                 requireActivity().finish();
@@ -65,7 +65,6 @@ public class LogOutFragment extends Fragment {
                 })
                 .setNegativeButton("No", (dialog, which) -> {
                     dialog.dismiss();
-                    // Opcional: volver al fragment anterior
                     requireActivity().onBackPressed();
                 })
                 .setCancelable(false)

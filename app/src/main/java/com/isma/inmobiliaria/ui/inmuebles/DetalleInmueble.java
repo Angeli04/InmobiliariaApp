@@ -2,8 +2,8 @@ package com.isma.inmobiliaria.ui.inmuebles;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.os.Build;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,8 +13,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.internal.GsonBuildConfig;
+import com.isma.inmobiliaria.BuildConfig;
 import com.isma.inmobiliaria.R;
 import com.isma.inmobiliaria.databinding.FragmentDetalleInmuebleBinding;
+import com.isma.inmobiliaria.request.ApiClient;
 
 import java.text.NumberFormat;
 import java.util.Locale;
@@ -45,7 +48,7 @@ public class DetalleInmueble extends Fragment {
             binding.tvLongitud.setText(inmueble.getLongitud() + "");
             binding.checkBoxDisponible.setChecked(inmueble.isHabilitado());
             Glide.with(getContext())
-                    .load( "http://192.168.0.7:5164" + inmueble.getImagenUrl())
+                    .load( BuildConfig.BASE_URL + inmueble.getImagenUrl())
                     .placeholder(R.drawable.ic_no_image)
                     .error("null")
                     .into(binding.imagenDetalle);

@@ -15,11 +15,9 @@ public class Usuario implements Serializable {
     private int rol;
     private int existe;
 
-    // Constructor vacío (obligatorio para Gson/Firebase)
     public Usuario() {
     }
 
-    // Constructor completo (con los parámetros ordenados y corregidos)
     public Usuario(int idUsuario, String nombre, String apellido, String email, String clave, int dni, String telefono, String avatar, int rol, int existe) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -33,7 +31,6 @@ public class Usuario implements Serializable {
         this.existe = existe;
     }
 
-    // Getters y Setters (incluyendo los que faltaban)
     public int getIdUsuario() {
         return idUsuario;
     }

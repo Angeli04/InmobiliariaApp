@@ -16,18 +16,11 @@ public class BiometricHelper {
     private final BiometricPrompt biometricPrompt;
     private final BiometricPrompt.PromptInfo promptInfo;
 
-    /**
-     * Constructor que prepara todo.
-     * @param activity La LoginActivity (necesaria para el Context y el Executor)
-     * @param viewModel El ViewModel (para reportar los resultados)
-     */
+
     public BiometricHelper(@NonNull AppCompatActivity activity, @NonNull LoginActivityViewModel viewModel) {
 
-        // 1. Obtiene el Executor
+        //  Obtiene el Executor
         this.executor = ContextCompat.getMainExecutor(activity);
-
-        // 2. Crea el Callback (aquí está la lógica que movimos)
-        //    Reporta los resultados directamente al ViewModel.
         this.biometricPrompt = new BiometricPrompt(activity, executor, new BiometricPrompt.AuthenticationCallback() {
             @Override
             public void onAuthenticationError(int errorCode, @NonNull CharSequence errString) {
@@ -47,8 +40,6 @@ public class BiometricHelper {
                 viewModel.onBiometricAuthenticationSucceeded();
             }
         });
-
-        // 3. Crea la información del Diálogo (esto también lo movimos)
         this.promptInfo = new BiometricPrompt.PromptInfo.Builder()
                 .setTitle("Inicio de sesión biométrico")
                 .setSubtitle("Inicia sesión usando tu huella o rostro")
@@ -56,9 +47,6 @@ public class BiometricHelper {
                 .build();
     }
 
-    /**
-     * Método público que la Activity llamará para mostrar el diálogo.
-     */
     public void authenticate() {
         biometricPrompt.authenticate(promptInfo);
     }

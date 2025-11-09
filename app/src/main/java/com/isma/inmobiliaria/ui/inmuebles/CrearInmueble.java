@@ -26,13 +26,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
-
-import com.isma.inmobiliaria.R;
 import com.isma.inmobiliaria.databinding.FragmentCrearInmuebleBinding;
-import com.isma.inmobiliaria.model.Inmueble;
 import com.isma.inmobiliaria.model.TipoInmueble;
-
-import java.util.Collections;
 import java.util.List;
 
 public class CrearInmueble extends Fragment {
@@ -46,7 +41,6 @@ public class CrearInmueble extends Fragment {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-                    // cuando el usuario elige una foto, esto se ejecuta
                     if (result.getResultCode() == Activity.RESULT_OK) {
                         mv.recibirFoto(result); // llama al ViewModel
                     }
@@ -77,14 +71,13 @@ public class CrearInmueble extends Fragment {
 
         binding.btnSeleccionarImagen.setOnClickListener(v -> {
             Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            arl.launch(intent); // Lanza el "receptor" de la galería
+            arl.launch(intent);
         });
 
 
         binding.btnGuardarInmueble.setOnClickListener(v -> {
 
             TipoInmueble tipoSeleccionado = (TipoInmueble) binding.spTipoInmueble.getSelectedItem();
-
 
             mv.cargarInmueble(
                     binding.etDireccion.getText().toString(),
@@ -164,8 +157,6 @@ public class CrearInmueble extends Fragment {
                 }
             }
         });
-
-
         mv.traerTipos();
     }
 }
